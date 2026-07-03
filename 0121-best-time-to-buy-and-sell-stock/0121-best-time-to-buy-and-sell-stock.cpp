@@ -13,7 +13,7 @@ public:
                 ans=max(ans,nums[r]-nums[l]);
             }
             else{
-                l++;
+                l=r;
             }
             r++;
         }
