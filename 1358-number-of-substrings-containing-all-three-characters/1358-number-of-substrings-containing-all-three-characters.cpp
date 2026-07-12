@@ -1,19 +1,18 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int freq[3] = {0};
-        int left = 0, ans = 0;
-        int n = s.size();
-
-        for (int right = 0; right < n; right++) {
-            freq[s[right] - 'a']++;
-
-            while (freq[0] > 0 && freq[1] > 0 && freq[2] > 0) {
-                ans += n - right;
-                freq[s[left++] - 'a']--;
+        vector<int>mp(3,0);
+        int n=s.size();
+        int low=0;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            mp[s[i]-'a']++;
+            while(mp[0]>0 && mp[1]>0 && mp[2]>0){
+                ans+=n-i;
+                mp[s[low]-'a']--;
+                low++;
             }
         }
-
         return ans;
     }
 };
