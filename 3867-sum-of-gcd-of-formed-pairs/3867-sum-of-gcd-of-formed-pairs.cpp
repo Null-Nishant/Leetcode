@@ -1,32 +1,21 @@
 class Solution {
 public:
-    int gcd(int a,int b){
-        while(b!=0){
-            int temp=b;
-             b=a%b;
-            a=temp;
-        }
-        return a;
-    }
     long long gcdSum(vector<int>& nums) {
-        long long ans=0;
+        int n=nums.size();
+        int mx=0;
 
-        vector<int>arr;
-        int maxi=nums[0];
-        for(int i:nums){
-            maxi=max(i,maxi);
-            arr.push_back(gcd(maxi,i));
+        for(int i=0;i<n;i++){
+            if(nums[i]>mx) mx = nums[i];
+            nums[i] = gcd(mx,nums[i]);
         }
 
-        sort(arr.begin(),arr.end());
-
-        int st=0,end=arr.size()-1;
-        // for(int i:arr){
-        //     cout<<i<<" ";
-        // }
-        while(st<end){
-            ans+=gcd(arr[st++],arr[end--]);
+        sort(nums.begin(),nums.end());
+        int l=0, h=n-1;
+        long long result=0;
+        while(l<h){
+            result += gcd(nums[l],nums[h]);
+            l++;h--;
         }
-        return ans;
+        return result;
     }
 };
