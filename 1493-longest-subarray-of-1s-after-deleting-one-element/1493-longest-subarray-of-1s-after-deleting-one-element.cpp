@@ -2,13 +2,11 @@ class Solution {
 public:
     int longestSubarray(vector<int>& nums) {
         vector<int> mp(2, 0);
-        bool flag=false;
         int low = 0;
         int ans = 0;
         for (int i = 0; i < nums.size(); i++) {
             mp[nums[i]]++;
             while (mp[0] > 1) {
-                flag=true;
                 mp[nums[low]]--;
                 low++;
             }
