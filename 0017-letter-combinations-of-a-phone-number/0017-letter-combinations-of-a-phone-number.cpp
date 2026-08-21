@@ -1,45 +1,24 @@
 class Solution {
 public:
-    vector<string> ans;
-
-    void helper(int index, string &digits,
-                vector<string> &mapping,
-                string &curr)
-    {
-        if(index == digits.size())
-        {
-            ans.push_back(curr);
+    void helper(int index, string& digits, string path, vector<string>& map,
+                vector<string>& ans) {
+        if (index >= digits.size()) {
+            ans.push_back(path);
             return;
         }
-
-        string letters = mapping[digits[index]-'0'];
-
-        for(char ch : letters)
-        {
-            curr.push_back(ch);        // Choose
-
-            helper(index+1, digits, mapping, curr); // Explore
-
-            curr.pop_back();           // Undo
+        for (int i = 0; i < map[digits[index] - '0'].size(); i++) {
+            path+=map[digits[index]-'0'][i];
+            helper(index+1, digits, path, map, ans);
+            path.pop_back();
         }
+        return ;
     }
-
     vector<string> letterCombinations(string digits) {
-
-        if(digits.empty())
-            return {};
-
-        vector<string> mapping =
-        {
-            "", "", "abc", "def", "ghi",
-            "jkl", "mno", "pqrs",
-            "tuv", "wxyz"
-        };
-
-        string curr;
-
-        helper(0, digits, mapping, curr);
-
+        vector<string> map = {"",    "",    "abc",  "def", "ghi",
+                              "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        string path = "";
+        vector<string> ans;
+        helper(0, digits, path, map, ans);
         return ans;
     }
 };
