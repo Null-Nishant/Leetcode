@@ -7,7 +7,7 @@ public:
             ans.push_back(path);
             return;
         }
-        if (index == arr.size() || target < 0) {
+        if (index >= arr.size() || target < 0) {
             return;
         }
         for (int i = index; i < arr.size(); i++) {
