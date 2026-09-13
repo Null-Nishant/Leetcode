@@ -8,7 +8,7 @@ public:
         for (int i = index; i < nums.size(); i++) {
             swap(nums[index], nums[i]);
             helper(index + 1, nums, ans);
-            swap(nums[index],nums[i]);
+            swap(nums[index], nums[i]);
         }
         return;
     }
