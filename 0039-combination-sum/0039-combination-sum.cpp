@@ -1,36 +1,29 @@
 class Solution {
 public:
-    void helper(int index, vector<int>& candidates, int target,
-                vector<int>& temp, vector<vector<int>>& ans) {
-
+    void solver(int index, vector<int>& path, vector<vector<int>>& ans,
+                int target, vector<int>& arr) {
         if (target == 0) {
-            ans.push_back(temp);
+            ans.push_back(path);
             return;
         }
-
-        if (index >= candidates.size())
-            return;
-
-        for (int i = index; i < candidates.size(); i++) {
-
-            if (candidates[i] > target)
+        for (int i = index; i < arr.size(); i++) {
+            if (target < arr[i]){
                 continue;
-
-            temp.push_back(candidates[i]);
-
-            helper(i, candidates, target - candidates[i], temp, ans);
-
-            temp.pop_back();
+            }
+            path.push_back(arr[i]);
+            solver(i, path, ans, target - arr[i], arr);
+            path.pop_back();
         }
+        return;
     }
-
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-
-        vector<int> temp;
+    vector<vector<int>> combinationSum(vector<int>& arr, int target) {
         vector<vector<int>> ans;
-
-        helper(0, candidates, target, temp, ans);
-
+        vector<int> path;
+        solver(0, path, ans, target, arr);
         return ans;
     }
 };
+
+
+    
+
