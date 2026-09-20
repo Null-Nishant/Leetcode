@@ -14,7 +14,7 @@ public:
         return;
     }
     vector<vector<int>> combine(int n, int k) {
-        
+
         vector<int> path;
         vector<vector<int>> ans;
         solver(1, n, k, path, ans);
