@@ -5,8 +5,7 @@ public:
         for (int i = start + 1; i <= end; i++) {
             if (nums[i] > nums[i - 1]) {
                 ans++;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -15,8 +14,7 @@ public:
         for (int i = start + 1; i <= end; i++) {
             if (nums[i] < nums[i - 1]) {
                 ans1++;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -25,15 +23,23 @@ public:
     }
 
     int longestMonotonicSubarray(vector<int>& nums) {
-        int ans = 1;
-        int n = nums.size();
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j <= i; j++) {
-                ans = max(ans, helper(j, i, nums));
+        int decrease = 1;
+        int increase = 1;
+        int ans=1;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] > nums[i - 1]) {
+                increase++;
+                decrease = 1;
+            } else if (nums[i] < nums[i - 1]) {
+                increase = 1;
+                decrease++;
             }
+            else{
+                increase=1;
+                decrease=1;
+            }
+            ans=max({ans,increase,decrease});
         }
-
         return ans;
     }
 };
